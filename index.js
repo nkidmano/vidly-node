@@ -1,8 +1,12 @@
-const Joi = require('joi');
-const genres = require('./routes/genres');
 const express = require('express');
+const mongoose = require('mongoose');
+const genres = require('./routes/genres');
 const app = express();
 
+mongoose.connect('mongodb://localhost/vidly')
+  .then(() => console.log('Conneted to MongoDB...'))
+  .catch(err => console.error('Failed to connect to MongoDB...', err));
+  
 app.use(express.json());
 app.use('/api/genres', genres);
 
